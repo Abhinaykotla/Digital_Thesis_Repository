@@ -11,7 +11,7 @@ const PeerReview = () => {
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const user_id = localStorage.getItem('user_id') ? localStorage.getItem('user_id') : null;
+  const user_id = localStorage.getItem('user_id')?localStorage.getItem('user_id'):null;
   const role = localStorage.getItem('role');
   useEffect(() => {
     const fetchThesis = async () => {
@@ -57,10 +57,11 @@ const PeerReview = () => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (rating == '') {
-      alert('Please Enter Proper Comment and Select Rating');
-      return;
-    }
+      if(rating=='')
+      {
+        alert('Please Enter Proper Comment and Select Rating');
+        return;
+      }
     const reviewData = {
       thesisId: thesis?.thesis_id,
       reviewerId: localStorage.getItem('user_id'),
@@ -121,7 +122,7 @@ const PeerReview = () => {
 
   const deleteComment = async (comment_id) => {
     try {
-      await fetch(`http://localhost:3000/api/deleteComment?comment_id=` + comment_id, {
+      await fetch(`http://localhost:3000/api/deleteComment?comment_id=`+comment_id,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -162,12 +163,12 @@ const PeerReview = () => {
           <h5 className="card-subtitle mb-2 text-muted">Submitted by: {thesis.author}</h5>
           <h6 className="card-subtitle mb-3 text-muted">Year: {thesis.year}</h6>
           <h6 className="card-subtitle mb-3 text-muted">Topic: {thesis.topic}</h6>
-          <p className='card-text'>Created At : {new Date(thesis.created_at).toLocaleDateString()} </p>
+          <p className='card-text'>Created At : { new Date(thesis.created_at).toLocaleDateString()} </p>
           <p className="card-text">
             <strong>Abstract:</strong> {thesis.abstract || 'No abstract provided.'}
           </p>
           <h6 className="card-subtitle mb-3 text-muted">Theses File: <br></br><a href={thesis.file} className='btn btn-primary w-25' target='_blank'>Download Theses Document</a></h6>
-
+          
         </div>
       </div>
 
@@ -184,16 +185,16 @@ const PeerReview = () => {
                   <small className="text-muted">
                     Commented by: {comment.reviewer_name} - Rating: {'⭐'.repeat(comment.rating)}
                     &emsp;
-                    {role == 'admin' ? (<a
-                      className="text-danger" role="button" title='Delete Comment and Rating'
-                      onClick={() => deleteComment(comment.review_id)}
-                    >
-                      Delete Comment
-                    </a>
-                    ) : ('')}
+                    {role=='admin' ? ( <a
+          className="text-danger" role="button" title='Delete Comment and Rating'
+          onClick={() => deleteComment(comment.review_id)}
+        >
+          Delete Comment
+        </a>
+                    ):( '' )}
 
-                    {/* <a className='text-danger' onClick={deleteComment(comment.review_id)}>Delete Comment</a> */}
-
+        {/* <a className='text-danger' onClick={deleteComment(comment.review_id)}>Delete Comment</a> */}
+                    
                   </small>
                 </li>
               ))}
@@ -204,59 +205,59 @@ const PeerReview = () => {
         </div>
       </div>
       <div>
-        {user_id >= 0 ? (
-          <div className="card">
-            <div className="card-header">
-              <h4>Leave a Comment</h4>
+      { user_id>0 ? (
+      <div className="card">
+        <div className="card-header">
+          <h4>Leave a Comment</h4>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleCommentSubmit}>
+            <div className="mb-3">
+              <textarea
+                className="form-control"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Write your comment here..."
+                rows="3"
+                required
+              />
             </div>
-            <div className="card-body">
-              <form onSubmit={handleCommentSubmit}>
-                <div className="mb-3">
-                  <textarea
-                    className="form-control"
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="Write your comment here..."
-                    rows="3"
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Rating:</label>
-                  <div>
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span
-                        key={star}
-                        className={`star ${star <= rating ? 'text-warning' : 'text-muted'}`}
-                        style={{ cursor: 'pointer', fontSize: '1.5rem' }}
-                        onClick={() => setRating(star)}
-                      >
-                        ⭐
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Submit Comment
-                </button>
-              </form>
-            </div>
-            <div className="card mt-4">
-              <div className="card-body">
-                <button className="btn btn-success" onClick={handleDownloadClick}>
-                  Download PDF
-                </button>
+            <div className="mb-3">
+              <label className="form-label">Rating:</label>
+              <div>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    className={`star ${star <= rating ? 'text-warning' : 'text-muted'}`}
+                    style={{ cursor: 'pointer', fontSize: '1.5rem' }}
+                    onClick={() => setRating(star)}
+                  >
+                    ⭐
+                  </span>
+                ))}
               </div>
             </div>
-
-          </div>
-
-        ) : (
-          <p className="text-muted"><a href='/login' className='btn btn-primary w-50' >  Login to Comment.</a></p>
-        )}
-
+            <button type="submit" className="btn btn-primary">
+              Submit Comment
+            </button>
+          </form>
+        </div>
+        <div className="card mt-4">
+        <div className="card-body">
+          <button className="btn btn-success" onClick={handleDownloadClick}>
+            Download PDF
+          </button>
+        </div>
       </div>
 
+      </div>
+      
+     ) :  ( 
+      <p className="text-muted"><a href='/login' className='btn btn-primary w-50' >  Login to Comment.</a></p>
+     )}
+
+</div>
+      
       <div className="mt-4">
         {/* <NotificationSystem /> */}
         {/* <ModerationTools /> */}
