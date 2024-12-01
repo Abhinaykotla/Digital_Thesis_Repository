@@ -1,0 +1,95 @@
+/* Katram Ananya - 1002170527
+Kannan Shrii Sudhan - 1002167382
+Kalidindi Harshavardhan Varma - 1002157596
+Kondreddigari Yogeswar Reddy - 1002123130
+Kotla Abhinay - 1002195827 */
+header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  box-shadow: 10px 10px 40px 0 rgba(0, 0, 0, .5);
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out; 
+}
+
+.container1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.menu-toggle {
+  font-size: 28px;
+  color: rgb(0, 0, 0);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; /* Hide on larger screens */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav ul li {
+  display: flex;
+  white-space: nowrap;
+
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: rgb(14, 13, 13);
+}
+
+.close-menu {
+  font-size: 24px;
+  color: rgb(19, 18, 18);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav ul.open {
+  display: block;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Show on small screens */
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+  }
+
+  nav ul.open {
+    display: flex;
+  }
+}
+a
+{
+  text-decoration: none;
+}
+.search-results li
+{
+  text-decoration: none;
+}
