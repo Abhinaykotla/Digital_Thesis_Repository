@@ -34,8 +34,8 @@ const AdminHeader = () => {
             <li><Link to="/admindashboard">Dashboard</Link></li>
             <li><Link to="/search">Repository</Link></li>
             {/* <li><Link to="/submitthesis">Submit Thesis</Link></li> */}
-            <li><Link to="/thesistable">Thesis Submissions</Link></li>
-            <li><Link to="/statistics">Statistics</Link></li>
+            {/* <li><Link to="/thesistable">Thesis Submissions</Link></li> */}
+            {/* <li><Link to="/statistics">Statistics</Link></li> */}
             {/* <li><Link to="/thesistable">Peer Review</Link></li> */}
             {/* <li><Link to="/about">About Us</Link></li> */}
             {/* <li><Link to="/contact">Contact</Link></li> */}
@@ -44,7 +44,7 @@ const AdminHeader = () => {
             {/* <li><Link to="/register">Register</Link></li> */}
             <li><Link to='/chat'>Chat</Link></li>
             <li><Link to='logout'>Logout</Link></li>
-            
+
           </ul>
         </nav>
       </div>
