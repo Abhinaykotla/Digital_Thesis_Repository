@@ -86,6 +86,13 @@ const Chat = () => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="mt-5">
       <div className="container-fluid row vh-100">
@@ -148,6 +155,7 @@ const Chat = () => {
                     className="form-control"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Type a message"
                   />
                   <button className="btn btn-primary" onClick={handleSendMessage}>
