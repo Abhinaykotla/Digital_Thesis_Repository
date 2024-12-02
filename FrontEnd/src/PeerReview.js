@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import NotificationSystem from './NotificationSystem';
+import ModerationTools from './ModerationTools';
 
 const PeerReview = () => {
   const { thesisId } = useParams();
@@ -9,9 +11,8 @@ const PeerReview = () => {
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const user_id = localStorage.getItem('user_id') ? localStorage.getItem('user_id') : null;
+  const user_id = localStorage.getItem('user_id');
   const role = localStorage.getItem('role');
-
   useEffect(() => {
     const fetchThesis = async () => {
       setLoading(true);
@@ -56,8 +57,12 @@ const PeerReview = () => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (rating === '') {
-      alert('Please Enter Proper Comment and Select Rating');
+    if (rating === 0) {
+      alert('Please select a rating before submitting your comment.');
+      return;
+    }
+    if (newComment.trim() === '') {
+      alert('Please enter a comment before submitting.');
       return;
     }
     const reviewData = {
@@ -128,11 +133,12 @@ const PeerReview = () => {
         }
       });
       setComments((prevComments) => prevComments.filter(comment => comment.review_id !== comment_id));
+
+
     } catch (err) {
-      console.error('Failed to delete comment', err);
+      console.error('Failed to track download', err);
     }
   };
-
   if (loading) {
     return <div className="text-center mt-4">Loading...</div>;
   }
@@ -166,6 +172,7 @@ const PeerReview = () => {
             <strong>Abstract:</strong> {thesis.abstract || 'No abstract provided.'}
           </p>
           <h6 className="card-subtitle mb-3 text-muted">Theses File: <br></br><a href={thesis.file} className='btn btn-primary w-25' target='_blank' onClick={handleDownloadClick}>Download Theses Document</a></h6>
+
         </div>
       </div>
 
@@ -182,14 +189,16 @@ const PeerReview = () => {
                   <small className="text-muted">
                     Commented by: {comment.reviewer_name} - Rating: {'⭐'.repeat(comment.rating)}
                     &emsp;
-                    {role === 'admin' ? (
-                      <a
-                        className="text-danger" role="button" title='Delete Comment and Rating'
-                        onClick={() => deleteComment(comment.review_id)}
-                      >
-                        Delete Comment
-                      </a>
+                    {role === 'admin' ? (<a
+                      className="text-danger" role="button" title='Delete Comment and Rating'
+                      onClick={() => deleteComment(comment.review_id)}
+                    >
+                      Delete Comment
+                    </a>
                     ) : ('')}
+
+                    {/* <a className='text-danger' onClick={deleteComment(comment.review_id)}>Delete Comment</a> */}
+
                   </small>
                 </li>
               ))}
@@ -200,7 +209,7 @@ const PeerReview = () => {
         </div>
       </div>
       <div>
-        {user_id >= 0 ? (
+        {user_id ? (
           <div className="card">
             <div className="card-header">
               <h4>Leave a Comment</h4>
@@ -244,10 +253,18 @@ const PeerReview = () => {
                 </button>
               </div>
             </div>
+
           </div>
+
         ) : (
           <p className="text-muted"><a href='/login' className='btn btn-primary w-50' >  Login to Comment.</a></p>
         )}
+
+      </div>
+
+      <div className="mt-4">
+        {/* <NotificationSystem /> */}
+        {/* <ModerationTools /> */}
       </div>
     </div>
   );
