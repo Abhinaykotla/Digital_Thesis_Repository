@@ -28,13 +28,13 @@ const SearchFilters = ({ onFilter }) => {
         value={filters.topic}
         onChange={handleFilterChange}
       />
-      <input
+      {/* <input
         type="text"
         name="author"
         placeholder="Author"
         value={filters.author}
         onChange={handleFilterChange}
-      />
+      /> */}
       <input
         type="text"
         name="year"

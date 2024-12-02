@@ -47,6 +47,12 @@ const About = () => {
             <p>Database Administrator</p>
             <p>Harsha designed and managed the database, optimized queries for performance, and ensured the security and integrity of the repository's data.</p>
           </div>
+          <div className="team-member col-6">
+            <img src="./user.png" alt="Team Member" />
+            <h3>Could be you!</h3>
+            <p> Join our team and contribute to the growth of academic excellence!</p>
+            <p> Contact us to learn more about opportunities and collaborations.</p>
+          </div>
         </div>
       </section>
       <div className='row'>
