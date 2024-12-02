@@ -81,7 +81,7 @@ CREATE TABLE `theses` (
 CREATE TABLE `thesis_statistics` (
   `stat_id` int(11) NOT NULL,
   `thesis_id` int(11) DEFAULT NULL,
-  `views` int(11) DEFAULT 0,
+  `views` FLOAT(11) DEFAULT 0,
   `downloads` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

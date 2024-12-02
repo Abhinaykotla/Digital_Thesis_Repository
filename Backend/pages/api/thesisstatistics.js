@@ -60,6 +60,15 @@ export default async function handler(req, res) {
 
     const [rows] = await db.query(query, queryParams);
 
+    // Check if views count is not a whole number and round it if necessary
+    for (let row of rows) {
+      if (row.views % 1 !== 0) {
+        const roundedViews = Math.ceil(row.views);
+        await db.query('UPDATE thesis_statistics SET views = ? WHERE stat_id = ?', [roundedViews, row.stat_id]);
+        row.views = roundedViews;
+      }
+    }
+
     res.status(200).json({ data: rows });
   } catch (error) {
     console.error(error);

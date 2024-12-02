@@ -41,14 +41,16 @@ export default async function handler(req, res) {
       );
     } else {
       const column = type === 'view' ? 'views' : 'downloads';
-      await db.query(`UPDATE thesis_statistics SET ${column} = ${column} + 1 WHERE thesis_id = ?`, [
+      const increment = type === 'view' ? 0.5 : 1;
+      await db.query(`UPDATE thesis_statistics SET ${column} = ${column} + ? WHERE thesis_id = ?`, [
+        increment,
         thesis_id,
       ]);
     }
 
     return res.status(200).json({ status: 'success', message: 'Statistics updated successfully' });
   } catch (error) {
-    console.error(error);
+    console.error('Error updating thesis statistics:', error);
     return res.status(500).json({ status: 'error', error: 'Internal server error' });
   }
 }
