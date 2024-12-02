@@ -112,8 +112,8 @@ const PeerReview = () => {
         }),
       });
 
-      // Trigger the download
-      window.location.href = thesis?.file;
+      // Trigger the download in a new window
+      window.open(thesis?.file, '_blank');
     } catch (err) {
       console.error('Failed to track download', err);
     }
