@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './Header'; 
+import Header from './Header';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
@@ -20,24 +20,24 @@ import AdminDashboard from './AdminDashboard';
 import AdminHeader from './AdminHeader';
 import ChatPage from './ChatPage';
 import Logout from './Logout';
+import PasswordRecovery from './PasswordRecovery';
 
 
 const App = () => {
   const author_id = localStorage.getItem('user_id');
   let headerComponent = <Header />; // Default Header
-      
-  if(author_id)
-  {
-      const role = localStorage.getItem('role');
-      if (author_id) {
-        if (role === 'author') {
-          headerComponent = <AuthorHeader />;
-        } else if (role === 'admin') {
-          headerComponent = <AdminHeader />;
-        }
+
+  if (author_id) {
+    const role = localStorage.getItem('role');
+    if (author_id) {
+      if (role === 'author') {
+        headerComponent = <AuthorHeader />;
+      } else if (role === 'admin') {
+        headerComponent = <AdminHeader />;
       }
+    }
   }
-  
+
   return (
     <Router>
       {headerComponent}
@@ -61,9 +61,9 @@ const App = () => {
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/logout" element={<Logout />} />
-
+        <Route path="/password-recovery" element={<PasswordRecovery />} />
       </Routes>
-      
+
     </Router>
   );
 };

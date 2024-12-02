@@ -33,9 +33,9 @@ const Login = () => {
         console.log('User Info:', data);
 
         if (data.role === 'author') {
-          window.location.href='/authordashboard';
-        } else if(data.role=='admin') {
-          window.location.href='/admindashboard';
+          window.location.href = '/authordashboard';
+        } else if (data.role == 'admin') {
+          window.location.href = '/admindashboard';
         }
         else {
           setErrorMessage('Unauthorized role');
@@ -93,9 +93,20 @@ const Login = () => {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    onClick={() => window.location.href='/register'}
+                    onClick={() => window.location.href = '/register'}
                   >
                     Register
+                  </button>
+                </p>
+                <p className="mt-3">
+                  Forgot your password?
+                  <br />
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => window.location.href = '/password-recovery'}
+                  >
+                    Recover Password
                   </button>
                 </p>
               </form>
