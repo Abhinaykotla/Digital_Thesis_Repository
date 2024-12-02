@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import NotificationSystem from './NotificationSystem';
-import ModerationTools from './ModerationTools';
 
 const PeerReview = () => {
   const { thesisId } = useParams();
@@ -13,6 +11,7 @@ const PeerReview = () => {
   const [error, setError] = useState(null);
   const user_id = localStorage.getItem('user_id') ? localStorage.getItem('user_id') : null;
   const role = localStorage.getItem('role');
+
   useEffect(() => {
     const fetchThesis = async () => {
       setLoading(true);
@@ -57,7 +56,7 @@ const PeerReview = () => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (rating == '') {
+    if (rating === '') {
       alert('Please Enter Proper Comment and Select Rating');
       return;
     }
@@ -113,6 +112,7 @@ const PeerReview = () => {
         }),
       });
 
+      // Trigger the download
       window.location.href = thesis?.file;
     } catch (err) {
       console.error('Failed to track download', err);
@@ -128,12 +128,11 @@ const PeerReview = () => {
         }
       });
       setComments((prevComments) => prevComments.filter(comment => comment.review_id !== comment_id));
-
-
     } catch (err) {
-      console.error('Failed to track download', err);
+      console.error('Failed to delete comment', err);
     }
   };
+
   if (loading) {
     return <div className="text-center mt-4">Loading...</div>;
   }
@@ -166,8 +165,7 @@ const PeerReview = () => {
           <p className="card-text">
             <strong>Abstract:</strong> {thesis.abstract || 'No abstract provided.'}
           </p>
-          <h6 className="card-subtitle mb-3 text-muted">Theses File: <br></br><a href={thesis.file} className='btn btn-primary w-25' target='_blank'>Download Theses Document</a></h6>
-
+          <h6 className="card-subtitle mb-3 text-muted">Theses File: <br></br><a href={thesis.file} className='btn btn-primary w-25' target='_blank' onClick={handleDownloadClick}>Download Theses Document</a></h6>
         </div>
       </div>
 
@@ -184,16 +182,14 @@ const PeerReview = () => {
                   <small className="text-muted">
                     Commented by: {comment.reviewer_name} - Rating: {'⭐'.repeat(comment.rating)}
                     &emsp;
-                    {role == 'admin' ? (<a
-                      className="text-danger" role="button" title='Delete Comment and Rating'
-                      onClick={() => deleteComment(comment.review_id)}
-                    >
-                      Delete Comment
-                    </a>
+                    {role === 'admin' ? (
+                      <a
+                        className="text-danger" role="button" title='Delete Comment and Rating'
+                        onClick={() => deleteComment(comment.review_id)}
+                      >
+                        Delete Comment
+                      </a>
                     ) : ('')}
-
-                    {/* <a className='text-danger' onClick={deleteComment(comment.review_id)}>Delete Comment</a> */}
-
                   </small>
                 </li>
               ))}
@@ -248,18 +244,10 @@ const PeerReview = () => {
                 </button>
               </div>
             </div>
-
           </div>
-
         ) : (
           <p className="text-muted"><a href='/login' className='btn btn-primary w-50' >  Login to Comment.</a></p>
         )}
-
-      </div>
-
-      <div className="mt-4">
-        {/* <NotificationSystem /> */}
-        {/* <ModerationTools /> */}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const StatisticsDashboard = () => {
 
   const user_id = localStorage.getItem('user_id');
   useEffect(() => {
-    fetch('http://localhost:3000/api/thesisstatistics?user_id='+user_id)
+    fetch('http://localhost:3000/api/thesisstatistics?user_id=' + user_id)
       .then((response) => response.json())
       .then((result) => {
         setData(result.data);
@@ -18,7 +18,7 @@ const StatisticsDashboard = () => {
         console.error('Error fetching statistics:', error);
         setLoading(false);
       });
-  }, []);
+  }, [user_id]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -28,7 +28,7 @@ const StatisticsDashboard = () => {
     <div className="statistics-dashboard">
       <h1>Statistics Dashboard</h1>
       <StatisticsCharts />
-      
+
       <table>
         <thead>
           <tr>

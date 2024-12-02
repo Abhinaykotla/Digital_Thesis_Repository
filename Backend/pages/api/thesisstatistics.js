@@ -27,6 +27,12 @@ export default async function handler(req, res) {
   try {
     const { thesis_id, user_id } = req.query;
 
+    const [userRows] = await db.query('SELECT role FROM users WHERE user_id = ?', [user_id]);
+    if (userRows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const userRole = userRows[0].role;
+
     let query = `
       SELECT 
         ts.stat_id, ts.thesis_id, ts.views, ts.downloads,
@@ -47,7 +53,7 @@ export default async function handler(req, res) {
       queryParams.push(thesis_id);
     }
 
-    if (user_id!=1) {
+    if (userRole !== 'admin') {
       query += ' AND t.author_id = ?';
       queryParams.push(user_id);
     }
