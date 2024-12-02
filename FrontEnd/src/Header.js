@@ -32,6 +32,7 @@ const Header = () => {
             </li>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/search">Search</Link></li>
+            <li><Link to="/search">Repository</Link></li>
             {/* <li><Link to="/submitthesis">Submit Thesis</Link></li> */}
             {/* <li><Link to="/statistics">Statistics</Link></li> */}
             {/* <li><Link to="/thesistable">Peer Review</Link></li> */}
@@ -40,7 +41,7 @@ const Header = () => {
             {/* <li><a  href="" target="_blank">Blog</a></li> */}
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/register">Register</Link></li>
-            
+
           </ul>
         </nav>
       </div>
