@@ -4,11 +4,11 @@ Welcome to the Digital Thesis Repository, a project designed to provide a centra
 
 ## Team Members
 
+- **Kotla Abhinay** - 1002195827
 - **Katram Ananya** - 1002170527
 - **Kannan Shrii Sudhan** - 1002167382
 - **Kalidindi Harshavardhan Varma** - 1002157596
 - **Kondreddigari Yogeswar Reddy** - 1002123130
-- **Kotla Abhinay** - 1002195827
 
 ## Cloud Hosting
 
