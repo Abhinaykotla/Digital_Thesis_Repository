@@ -93,7 +93,6 @@ CREATE TABLE `thesis_statistics` (
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','author') NOT NULL,

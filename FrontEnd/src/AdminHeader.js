@@ -37,8 +37,8 @@ const AdminHeader = () => {
             {/* <li><Link to="/thesistable">Thesis Submissions</Link></li> */}
             {/* <li><Link to="/statistics">Statistics</Link></li> */}
             {/* <li><Link to="/thesistable">Peer Review</Link></li> */}
-            {/* <li><Link to="/about">About Us</Link></li> */}
-            {/* <li><Link to="/contact">Contact</Link></li> */}
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
             {/* <li><a  href="" target="_blank">Blog</a></li> */}
             {/* <li><Link to="/login">Login</Link></li> */}
             {/* <li><Link to="/register">Register</Link></li> */}

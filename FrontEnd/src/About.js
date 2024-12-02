@@ -19,62 +19,57 @@ const About = () => {
         <div className="team-members row">
           <div className="team-member col-6">
             <img src="./user.png" alt="Team Member" />
+            <h3>Abhinay</h3>
+            <p>Full Stack Developer</p>
+            <p>Abhinay worked on both the frontend and backend, designing the user interface, developing API endpoints, and implementing critical platform functionality.</p>
+          </div>
+          <div className="team-member col-6">
+            <img src="./user.png" alt="Team Member" />
             <h3>Shriisudhan</h3>
-            <p>Project Lead</p>
-            <p>Sudhan is dedicated to improving educational outcomes through innovative technology solutions.</p>
+            <p>Project Lead & Data Analyst</p>
+            <p>Shriisudhan led the project and provided insights by analyzing usage data, generating statistics, and improving the user experience through data-driven decisions.</p>
           </div>
           <div className="team-member col-6">
             <img src="./user.png" alt="Team Member" />
             <h3>Ananya</h3>
-            <p>Lead Developer</p>
-            <p>Ananya specializes in frontend development and user experience, ensuring our platform is user-friendly.</p>
-          </div>
-          <div className="team-member col-6">
-            <img src="./user.png" alt="Team Member" />
-            <h3>Abhinay</h3>
-            <p>Community Manager</p>
-            <p>Abhinay fosters community engagement and supports users to enhance their experience on our platform.</p>
-          </div>
-          <div className="team-member col-6">
-            <img src="./user.png" alt="Team Member" />
-            <h3>Abhinay</h3>
-            <p>Community Manager</p>
-            <p>Abhinay fosters community engagement and supports users to enhance their experience on our platform.</p>
+            <p>Frontend Developer</p>
+            <p>Ananya specialized in creating intuitive interfaces, implementing search functionality, and ensuring a seamless user experience across devices.</p>
           </div>
           <div className="team-member col-6">
             <img src="./user.png" alt="Team Member" />
             <h3>Yogesh</h3>
-            <p>Community Manager</p>
-            <p>yogesh fosters community engagement and supports users to enhance their experience on our platform.</p>
+            <p>Back-End Developer</p>
+            <p>Yogesh focused on setting up the server, database, and APIs, handling authentication, and managing the backend infrastructure.</p>
           </div>
           <div className="team-member col-6">
             <img src="./user.png" alt="Team Member" />
             <h3>Harsha</h3>
-            <p>Community Manager</p>
-            <p>harsha fosters community engagement and supports users to enhance their experience on our platform.</p>
+            <p>Database Administrator</p>
+            <p>Harsha designed and managed the database, optimized queries for performance, and ensured the security and integrity of the repository's data.</p>
           </div>
         </div>
       </section>
       <div className='row'>
         <div className='col-6'>
-      <section className="history-section card">
-        <h2>History & Development</h2>
-        <p className='text-justify'>
-          Our project was initiated in 2024, inspired by the challenges faced by students during thesis submission and review processes. Through continuous feedback and collaboration, we've evolved into a platform that not only streamlines submissions but also encourages peer review and constructive feedback.
-        <p>Phase 1 : Reports and  Prototype of the Project</p>
-        <p> Phase 2 : Front-End  Development</p>
-        </p>
-      </section>
+          <section className="history-section card">
+            <h2>History & Development</h2>
+            <p className='text-justify'>
+              Our project began in 2024, inspired by the challenges faced by students during thesis submission and review processes. With a focus on addressing these pain points, we have evolved through collaborative efforts and feedback to create a comprehensive platform that simplifies submissions and fosters peer engagement.
+            </p>
+            <p><strong>Phase 1:</strong> Initial reports and project prototype development.</p>
+            <p><strong>Phase 2:</strong> Front-end development, focusing on user interface and responsive design.</p>
+            <p><strong>Phase 3:</strong> Back-end implementation, including database setup, API development, and user authentication.</p>
+          </section>
+        </div>
+        <div className='col-6'>
+          <section className="contact-section card">
+            <h2>Contact Us</h2>
+            <p>Have questions, suggestions, or feedback? We'd love to hear from you!</p>
+            <p>Email: <a href="mailto:info@thesisproject.com">info@thesisproject.com</a></p>
+          </section>
+        </div>
       </div>
-      <div className='col-6'>
-      <section className="contact-section card">
-        <h2>Contact Us</h2>
-        <p>If you have any questions, suggestions, or feedback, feel free to reach out!</p>
-        <p>Email: <a href="mailto:info@utacloud.com">info@thesisproject.com</a></p>
-        
-      </section>
-      </div>
-      </div>
+
     </div>
   );
 };
