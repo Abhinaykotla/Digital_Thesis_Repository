@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 
@@ -10,6 +10,16 @@ const Chat = () => {
   const [receiverId, setReceiverId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Scroll when messages update
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useEffect(() => {
     if (senderId) {
@@ -128,6 +138,7 @@ const Chat = () => {
                     </div>
                   </div>
                 ))}
+                <div ref={messagesEndRef} /> {/* Invisible element at bottom */}
               </div>
 
               <div className="border-top p-3 bg-white">

@@ -34,7 +34,7 @@ app.get('/api/chats/:senderId/:receiverId', async (req, res) => {
       `SELECT * FROM user_chats 
        WHERE (sender_id = ? AND receiver_id = ?) 
           OR (sender_id = ? AND receiver_id = ?)
-       ORDER BY date DESC`,
+       ORDER BY date ASC`,
       [senderId, receiverId, receiverId, senderId]
     );
     res.status(200).json({ status: 'success', chats: rows });
