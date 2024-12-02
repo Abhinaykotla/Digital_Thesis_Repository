@@ -47,7 +47,7 @@ const SearchPage = () => {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const handleFilter = (newFilters) => {
