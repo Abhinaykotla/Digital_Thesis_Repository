@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       );
     } else {
       const column = type === 'view' ? 'views' : 'downloads';
-      const increment = type === 'view' ? 0.5 : 1;
+      const increment = type === 'view' ? 1 : 1;
       await db.query(`UPDATE thesis_statistics SET ${column} = ${column} + ? WHERE thesis_id = ?`, [
         increment,
         thesis_id,
