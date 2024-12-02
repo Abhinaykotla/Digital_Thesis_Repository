@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const ThesisSubmissionPage = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [trackingId, setTrackingId] = useState('');
+  const [thesisId, setThesisId] = useState('');
   const [submissions, setSubmissions] = useState([]);
   const [error, setError] = useState(null);
   const author_id = localStorage.getItem('user_id');
@@ -15,9 +15,7 @@ const ThesisSubmissionPage = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const generatedTrackingId = Math.random().toString(36).substring(2, 15);
-    formData.append('trackingId', generatedTrackingId);
-    formData.append('author_id',author_id);
+    formData.append('author_id', author_id);
     try {
       const response = await fetch('http://localhost:3000/api/thesisSubmission', {
         method: 'POST',
@@ -31,23 +29,22 @@ const ThesisSubmissionPage = () => {
       const result = await response.json();
 
       const newSubmission = {
-        trackingId: generatedTrackingId,
+        thesisId: result.thesisId,
         title: formData.get('thesisTitle'),
         author: formData.get('authorName'),
         year: formData.get('year'),
         email: formData.get('email'),
         keywords: formData.get('keywords'),
         fileName: formData.get('uploadFile')?.name || 'Uploaded File',
-        serverId: result.thesisId,
-        abstract: formData.abstract,
-        topic: formData.topic,
+        abstract: formData.get('abstract'),
+        topic: formData.get('topic'),
       };
 
       const updatedSubmissions = [...submissions, newSubmission];
       localStorage.setItem('thesisSubmissions', JSON.stringify(updatedSubmissions));
 
       setSubmissions(updatedSubmissions);
-      setTrackingId(generatedTrackingId);
+      setThesisId(result.thesisId);
       setSubmitted(true);
       setError(null);
       event.target.reset();
@@ -56,6 +53,7 @@ const ThesisSubmissionPage = () => {
       setError('An error occurred while submitting your thesis. Please try again.');
     }
   };
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -70,7 +68,7 @@ const ThesisSubmissionPage = () => {
           </div>
           <div>
             <label>Topic</label>
-            <input type="text" name="topic" required/>
+            <input type="text" name="topic" required />
           </div>
           <div>
             <label>Author Name:</label>
@@ -91,7 +89,7 @@ const ThesisSubmissionPage = () => {
               name="year"
               required
               value={currentYear}
-              
+
             />
           </div>
           <div>
@@ -107,7 +105,7 @@ const ThesisSubmissionPage = () => {
       ) : (
         <div>
           <h2>Thesis Submitted Successfully!</h2>
-          <p>Your tracking ID: <strong>{trackingId}</strong></p>
+          <p>Your thesis ID: <strong>{thesisId}</strong></p>
         </div>
       )}
 
@@ -119,7 +117,7 @@ const ThesisSubmissionPage = () => {
           <table>
             <thead>
               <tr>
-                <th>Tracking ID</th>
+                <th>Thesis ID</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Year</th>
@@ -131,7 +129,7 @@ const ThesisSubmissionPage = () => {
             <tbody>
               {submissions.map((submission, index) => (
                 <tr key={index}>
-                  <td>{submission.trackingId}</td>
+                  <td>{submission.thesisId}</td>
                   <td>{submission.title}</td>
                   <td>{submission.author}</td>
                   <td>{submission.year}</td>

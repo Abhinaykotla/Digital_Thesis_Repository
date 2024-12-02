@@ -31,7 +31,7 @@ const Header = () => {
               </button>
             </li>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/search">Search</Link></li>
+            {/* <li><Link to="/search">Search</Link></li> */}
             <li><Link to="/search">Repository</Link></li>
             {/* <li><Link to="/submitthesis">Submit Thesis</Link></li> */}
             {/* <li><Link to="/statistics">Statistics</Link></li> */}

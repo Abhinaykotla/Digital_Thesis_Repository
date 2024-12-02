@@ -71,7 +71,7 @@ const SubmitThesisPage = () => {
       </div>
       <SubmissionGuidelines />
       <TemplateDownloads />
-      
+
       {!submitted ? (
         <>
           {/* <ThesisSubmissionForm onSubmit={handleThesisSubmit} /> */}
@@ -81,7 +81,7 @@ const SubmitThesisPage = () => {
         <ConfirmationTracking trackingId={trackingId} />
       )}
 
-      {/* Display the submissions in a table */}
+      {/* Display the submissions in a table
       {submissions.length > 0 && (
         <div className="submissions-table">
           <h2>Submitted Theses</h2>
@@ -108,7 +108,7 @@ const SubmitThesisPage = () => {
             </tbody>
           </table>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

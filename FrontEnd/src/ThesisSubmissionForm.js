@@ -54,7 +54,7 @@ const ThesisSubmissionForm = () => {
       if (response.ok) {
         setSubmissionResult({
           success: true,
-          trackingId: result.thesisId,
+          thesisId: result.thesisId,
         });
       } else {
         setSubmissionResult({
@@ -138,7 +138,7 @@ const ThesisSubmissionForm = () => {
         <div className="submission-result">
           {submissionResult.success ? (
             <p>
-              Thesis submitted successfully! Your tracking ID is: <strong>{submissionResult.trackingId}</strong>
+              Thesis submitted successfully! Your thesis ID is: <strong>{submissionResult.thesisId}</strong>
             </p>
           ) : (
             <p>Error: {submissionResult.message}</p>
