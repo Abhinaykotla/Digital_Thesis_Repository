@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 09:14 PM
+-- Generation Time: Dec 02, 2024 at 04:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -16,21 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
--- Drop tables in correct order due to foreign key constraints
-DROP TABLE IF EXISTS peer_reviews;
-DROP TABLE IF EXISTS thesis_statistics;
-DROP TABLE IF EXISTS user_chats;
-DROP TABLE IF EXISTS theses;
-DROP TABLE IF EXISTS users;
-
--- Now you can run the original CREATE TABLE statements from the SQL dump
--- Tables will be created in this order:
--- 1. users (no foreign keys)
--- 2. theses (references users)
--- 3. thesis_statistics (references theses) 
--- 4. peer_reviews (references theses)
--- 5. user_chats (references users)
 
 --
 -- Database: `wdm`
@@ -52,7 +37,7 @@ CREATE TABLE `peer_reviews` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `theses`
@@ -73,6 +58,14 @@ CREATE TABLE `theses` (
   `author` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `theses`
+--
+
+INSERT INTO `theses` (`thesis_id`, `title`, `abstract`, `topic`, `author_id`, `year`, `keywords`, `file_url`, `created_at`, `updated_at`, `email`, `author`) VALUES
+(14, 'News Summarization using T5 Transformer', 'Business Problem: Readers frequently do not have time to read entire articles, and reading merely the headline and subheadings does not provide them with a complete picture of the content. News organizations such as the Associated Press, Bloomberg, and Reuters are actively trying to automate stories in areas such as finance and sports. It is hard for news organizations to produce summaries for every piece they publish. As a result, having in-built tools that summarize stories for users may be a good idea for news apps.', 'Text Summarization', 10, 2024, 'T5, ML, Summarization, News', '\\uploads\\f8da6424ab9205e6d6c645400.pdf', '2024-12-02 03:32:37', '2024-12-02 03:32:37', 'abhinaykotla@gmail.com', 'Abhinay Kotla');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `thesis_statistics`
@@ -81,10 +74,18 @@ CREATE TABLE `theses` (
 CREATE TABLE `thesis_statistics` (
   `stat_id` int(11) NOT NULL,
   `thesis_id` int(11) DEFAULT NULL,
-  `views` FLOAT(11) DEFAULT 0,
+  `views` int(11) DEFAULT 0,
   `downloads` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `thesis_statistics`
+--
+
+INSERT INTO `thesis_statistics` (`stat_id`, `thesis_id`, `views`, `downloads`) VALUES
+(10, 14, 62, 1);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
@@ -102,6 +103,17 @@ CREATE TABLE `users` (
   `bio` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `first_name`, `email`, `password`, `role`, `created_at`, `phone`, `gender`, `bio`) VALUES
+(1, 'Admin Main', 'admin@gmail.com', '$2b$10$t3hfF9QBZcRn8O4HeCb5IuN3q1wo7Y9QXWGgJll9IjWePcBjuzR1e', 'admin', '2024-12-02 02:57:56', '999999999', 'other', 'Main Admin with user ID 1'),
+(10, 'Abhinay Kotla', 'abhinaykotla@gmail.com', '$2b$10$piZESL22vXqQBNttkjlYdeV9qIKCHY1iamo2A2O1i4bHRDHNpmb1K', 'author', '2024-12-02 03:11:25', '1002195827', 'male', 'Abhinay kotla bio: \nInterested in AI and ML. '),
+(11, 'Ananya ', 'ananya@gmail.com', '$2b$10$nMWaM8R47UkCpB7Lzk9JU.3D65QSvPikGvVRHUZWlv1opx.AGtxzu', 'author', '2024-12-02 03:21:12', '1002170527', 'female', 'Katram Ananya'),
+(12, 'Kannan Shrii Sudhan', 'shriisudhan@gmail.com', '$2b$10$qSGK88k8z5bB1W9OkZzc1eG7CLTL2/7ws2C0AkEv.G4mHyinrKp/u', 'author', '2024-12-02 03:24:06', '1002167382', 'male', 'Kannan Shrii Sudhan'),
+(13, 'Kalidindi Harshavardhan Varma', 'harshavardan@gmail.com', '$2b$10$aLsRxgo.jBptX3ixBjBWs.VLkF6vLsp7bkb03ih1n2IIL0VUuFhZ2', 'author', '2024-12-02 03:24:45', '1002157596', 'male', 'Kalidindi Harshavardhan Varma'),
+(14, 'Kondreddigari Yogeswar Reddy', 'yogeswar@gmail.com', '$2b$10$xJZy.vTsDI3rJ6KwgknFQO9mn6a6vv2loZQizz3jDwNIfO8XEmw8O', 'author', '2024-12-02 03:26:23', '1002123130', 'male', 'Kondreddigari Yogeswar Reddy');
 
 -- --------------------------------------------------------
 
@@ -119,6 +131,9 @@ CREATE TABLE `user_chats` (
   `update_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `peer_reviews`
@@ -162,25 +177,25 @@ ALTER TABLE `user_chats`
 -- AUTO_INCREMENT for table `peer_reviews`
 --
 ALTER TABLE `peer_reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `theses`
 --
 ALTER TABLE `theses`
-  MODIFY `thesis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `thesis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `thesis_statistics`
 --
 ALTER TABLE `thesis_statistics`
-  MODIFY `stat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `stat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_chats`
@@ -188,6 +203,9 @@ ALTER TABLE `users`
 ALTER TABLE `user_chats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
+--
+-- Constraints for dumped tables
+--
 
 --
 -- Constraints for table `peer_reviews`
@@ -195,3 +213,7 @@ ALTER TABLE `user_chats`
 ALTER TABLE `peer_reviews`
   ADD CONSTRAINT `peer_reviews_ibfk_1` FOREIGN KEY (`thesis_id`) REFERENCES `theses` (`thesis_id`) ON DELETE CASCADE;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
