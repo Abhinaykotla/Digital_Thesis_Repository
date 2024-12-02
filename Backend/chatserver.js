@@ -57,6 +57,23 @@ app.post('/api/chats', async (req, res) => {
        VALUES (?, ?, ?, ?)`,
       [sender_id, name, receiver_id, message]
     );
+
+    const chatMessage = {
+      sender_id,
+      name,
+      receiver_id,
+      message,
+      date: new Date(), // Add the date here
+    };
+
+    // Emit the message to both sender and receiver
+    if (userSockets[sender_id]) {
+      io.to(userSockets[sender_id]).emit('receiveMessage', chatMessage);
+    }
+    if (userSockets[receiver_id]) {
+      io.to(userSockets[receiver_id]).emit('receiveMessage', chatMessage);
+    }
+
     res.status(201).json({ status: 'success', chatId: result.insertId });
   } catch (err) {
     console.error(err);
@@ -76,15 +93,26 @@ io.on('connection', (socket) => {
     const { sender_id, name, receiver_id, message } = data;
 
     try {
-      await db.query(
+      const [result] = await db.query(
         `INSERT INTO user_chats (sender_id, name, receiver_id, message) 
          VALUES (?, ?, ?, ?)`,
         [sender_id, name, receiver_id, message]
       );
 
+      const chatMessage = {
+        sender_id,
+        name,
+        receiver_id,
+        message,
+        date: new Date(), // Add the date here
+      };
+
+      // Emit the message to both sender and receiver
+      if (userSockets[sender_id]) {
+        io.to(userSockets[sender_id]).emit('receiveMessage', chatMessage);
+      }
       if (userSockets[receiver_id]) {
-        console.log(`Sending message to ${receiver_id}`);
-        io.to(userSockets[receiver_id]).emit('receiveMessage', data);
+        io.to(userSockets[receiver_id]).emit('receiveMessage', chatMessage);
       }
     } catch (err) {
       console.error('Error saving message:', err);

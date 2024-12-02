@@ -12,7 +12,6 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
-    // console.log(typeof(senderId));
     if (senderId) {
       socket.emit('registerUser', senderId);
     }
@@ -71,21 +70,6 @@ const Chat = () => {
 
     try {
       await axios.post('http://localhost:5000/api/chats', messageData);
-
-      socket.emit('sendMessage', messageData);
-      const fetchChats = async () => {
-        if (receiverId) {
-          try {
-            const response = await axios.get(
-              `http://localhost:5000/api/chats/${senderId}/${receiverId}`
-            );
-            setMessages(response.data.chats);
-          } catch (err) {
-            console.error('Error fetching chats:', err);
-          }
-        }
-      };
-      fetchChats();
       setNewMessage('');
     } catch (err) {
       console.error('Error sending message:', err);
@@ -98,20 +82,18 @@ const Chat = () => {
         <div className="col-md-4 border-end bg-light">
           <h5 className="p-3 border-bottom">Users</h5>
           <div className="list-group">
-          {users
-  .filter((user) => user.user_id !== senderId) 
-  .map((user) => (
-    <button
-      key={user.user_id}
-      className={`list-group-item list-group-item-action ${
-        receiverId == user.user_id ? 'active' : ''
-      }`}
-      onClick={() => setReceiverId(user.user_id)}
-    >
-      {user.first_name}
-    </button>
-  ))}
-
+            {users
+              .filter((user) => user.user_id !== senderId)
+              .map((user) => (
+                <button
+                  key={user.user_id}
+                  className={`list-group-item list-group-item-action ${receiverId == user.user_id ? 'active' : ''
+                    }`}
+                  onClick={() => setReceiverId(user.user_id)}
+                >
+                  {user.first_name}
+                </button>
+              ))}
           </div>
         </div>
 
@@ -126,16 +108,14 @@ const Chat = () => {
                 {messages.map((msg, index) => (
                   <div
                     key={index}
-                    className={`d-flex mb-3 ${
-                      msg.sender_id == senderId ? 'justify-content-end' : ''
-                    }`}
+                    className={`d-flex mb-3 ${msg.sender_id == senderId ? 'justify-content-end' : ''
+                      }`}
                   >
                     <div
-                      className={`p-2 rounded ${
-                        msg.sender_id == senderId
-                          ? 'bg-primary text-white'
-                          : 'bg-secondary text-white'
-                      }`}
+                      className={`p-2 rounded ${msg.sender_id == senderId
+                        ? 'bg-primary text-white'
+                        : 'bg-secondary text-white'
+                        }`}
                       style={{ maxWidth: '70%' }}
                     >
                       <p className="mb-1 text-white">{msg.message}</p>
