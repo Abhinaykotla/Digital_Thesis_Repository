@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     if (rows.length === 0) {
       await db.query(
         'INSERT INTO thesis_statistics (thesis_id, views, downloads) VALUES (?, ?, ?)',
-        [thesis_id, type === 'view' ? 1 : 0, type === 'download' ? 1 : 0]
+        [thesis_id, 1, 0]
       );
     } else {
       const column = type === 'view' ? 'views' : 'downloads';

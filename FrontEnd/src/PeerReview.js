@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 const PeerReview = () => {
@@ -11,8 +11,11 @@ const PeerReview = () => {
   const [error, setError] = useState(null);
   const user_id = localStorage.getItem('user_id');
   const role = localStorage.getItem('role');
+  const hasTrackedView = useRef(false); // Ref to track if view has been tracked
 
   useEffect(() => {
+    let isFirstMount = true;
+
     const fetchThesis = async () => {
       setLoading(true);
       try {
@@ -25,6 +28,21 @@ const PeerReview = () => {
         const data = await response.json();
         setThesis(data.theses[0]);
         setComments(data.theses[0]?.reviews || []);
+
+        // Track view only on first successful load
+        if (isFirstMount && !hasTrackedView.current) {
+          await fetch(`http://localhost:3000/api/addthesesstatistics`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              thesis_id: thesisId,
+              type: 'view',
+            }),
+          });
+          hasTrackedView.current = true;
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -34,24 +52,9 @@ const PeerReview = () => {
 
     fetchThesis();
 
-    const trackView = async () => {
-      try {
-        await fetch(`http://localhost:3000/api/addthesesstatistics`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            thesis_id: thesisId,
-            type: 'view',
-          }),
-        });
-      } catch (err) {
-        console.error('Failed to track view', err);
-      }
+    return () => {
+      isFirstMount = false;
     };
-
-    trackView();
   }, [thesisId]);
 
   const handleCommentSubmit = async (e) => {
@@ -252,11 +255,6 @@ const PeerReview = () => {
         ) : (
           <p className="text-muted"><a href='/login' className='btn btn-primary w-50' >  Login to Comment.</a></p>
         )}
-      </div>
-
-      <div className="mt-4">
-        {/* <NotificationSystem /> */}
-        {/* <ModerationTools /> */}
       </div>
     </div>
   );
