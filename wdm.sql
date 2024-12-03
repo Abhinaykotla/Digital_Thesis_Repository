@@ -3,7 +3,6 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 09:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,11 +98,11 @@ CREATE TABLE `thesis_statistics` (
 --
 
 INSERT INTO `thesis_statistics` (`stat_id`, `thesis_id`, `views`, `downloads`) VALUES
-(10, 14, 45, 4),
-(12, 17, 30, 4),
-(13, 18, 44, 1),
-(25, 19, 12, 0),
-(27, 20, 6, 1);
+(10, 14, 52, 6),
+(12, 17, 32, 4),
+(13, 18, 47, 2),
+(25, 19, 13, 0),
+(27, 20, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -128,7 +127,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `email`, `password`, `role`, `created_at`, `phone`, `gender`, `bio`) VALUES
-(1, 'Admin Main', 'admin@gmail.com', '$2b$10$t3hfF9QBZcRn8O4HeCb5IuN3q1wo7Y9QXWGgJll9IjWePcBjuzR1e', 'admin', '2024-12-02 02:57:56', '999999999', 'other', 'Main Admin with user ID 1'),
+(1, 'Admin Main', 'admin@gmail.com', '$2b$10$udATnP.Q9ZMbpyBDLaNQFuJ0V82FFWnVb7YiQHE0DW0qq/tUR8uHu', 'admin', '2024-12-02 02:57:56', '999999999', 'other', 'Main Admin with user ID 1'),
 (10, 'Abhinay Kotla', 'abhinaykotla@gmail.com', '$2b$10$piZESL22vXqQBNttkjlYdeV9qIKCHY1iamo2A2O1i4bHRDHNpmb1K', 'author', '2024-12-02 03:11:25', '1002195827', 'male', 'Abhinay kotla bio: \nInterested in AI and ML. '),
 (11, 'Ananya ', 'ananya@gmail.com', '$2b$10$nMWaM8R47UkCpB7Lzk9JU.3D65QSvPikGvVRHUZWlv1opx.AGtxzu', 'author', '2024-12-02 03:21:12', '1002170527', 'female', 'Katram Ananya'),
 (12, 'Kannan Shrii Sudhan', 'shriisudhan@gmail.com', '$2b$10$qSGK88k8z5bB1W9OkZzc1eG7CLTL2/7ws2C0AkEv.G4mHyinrKp/u', 'author', '2024-12-02 03:24:06', '1002167382', 'male', 'Kannan Shrii Sudhan'),
@@ -166,7 +165,9 @@ INSERT INTO `user_chats` (`id`, `sender_id`, `name`, `receiver_id`, `message`, `
 (122, 14, 'Your Name', 1, 'I am struck, please help', '2024-12-02 01:24:07', '2024-12-02 07:24:07'),
 (123, 1, 'Your Name', 14, 'Done, Deleted the comment. Please reload the page to see the changes', '2024-12-02 01:24:54', '2024-12-02 07:24:54'),
 (124, 14, 'Your Name', 1, 'hello', '2024-12-02 01:26:31', '2024-12-02 07:26:31'),
-(125, 1, 'Your Name', 14, 'Hello Yogesh, Ho can I help?', '2024-12-02 01:26:56', '2024-12-02 07:26:56');
+(125, 1, 'Your Name', 14, 'Hello Yogesh, Ho can I help?', '2024-12-02 01:26:56', '2024-12-02 07:26:56'),
+(126, 10, 'Your Name', 1, 'Help me manage comments on my sub', '2024-12-02 20:25:41', '2024-12-03 02:25:41'),
+(127, 1, 'Your Name', 10, 'Sure let me know how I can help', '2024-12-02 20:25:57', '2024-12-03 02:25:57');
 
 --
 -- Indexes for dumped tables
@@ -214,7 +215,7 @@ ALTER TABLE `user_chats`
 -- AUTO_INCREMENT for table `peer_reviews`
 --
 ALTER TABLE `peer_reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `theses`
@@ -238,7 +239,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_chats`
 --
 ALTER TABLE `user_chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- Constraints for dumped tables
