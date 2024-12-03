@@ -11,7 +11,7 @@ const SubmissionGuidelines = () => {
         <li>The thesis should be submitted in PDF format.</li>
         <li>Ensure the document size does not exceed 10MB.</li>
       </ul>
-      <a href="/guidelines.pdf" download>Download Guidelines Document</a>
+      <a href="https://ieeeaccess.ieee.org/guide-for-authors/submission-guidelines/" target='blank'>Download Guidelines Document</a>
     </div>
   );
 };

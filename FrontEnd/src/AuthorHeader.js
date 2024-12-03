@@ -31,10 +31,10 @@ const AuthorHeader = () => {
               </button>
             </li>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/authordashboard">Dashboard</Link></li>
+            <li><Link to="/authordashboard">Statistics</Link></li>
             <li><Link to="/search">Repository</Link></li>
             <li><Link to="/submitthesis">Submit Thesis</Link></li>
-            <li><Link to="/statistics">Statistics</Link></li>
+            {/* <li><Link to="/statistics">Statistics</Link></li> */}
             <li><Link to="/thesistable">Peer Review</Link></li>
             <li><Link to="/about">About Us</Link></li>
             {/* <li><Link to="/contact">Contact</Link></li> */}

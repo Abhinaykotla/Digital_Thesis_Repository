@@ -89,6 +89,7 @@ const ThesisSubmissionPage = () => {
               name="year"
               required
               value={currentYear}
+              readOnly
 
             />
           </div>
