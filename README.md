@@ -1,53 +1,98 @@
 # Digital Thesis Repository
 
-Welcome to the Digital Thesis Repository, a project designed to provide a centralized platform for the storage and retrieval of academic thesis. This repository aims to streamline access to research work and support students, faculty, and researchers in their academic endeavors.
+Welcome to the **Digital Thesis Repository**, a platform designed to provide centralized storage and retrieval of academic theses. This repository aims to streamline access to research work and support students, faculty, and researchers in their academic endeavors.
 
-## Team Members
+## Table of Contents
 
-- **Kotla Abhinay** - 1002195827
-- **Katram Ananya** - 1002170527
-- **Kannan Shrii Sudhan** - 1002167382
-- **Kalidindi Harshavardhan Varma** - 1002157596
-- **Kondreddigari Yogeswar Reddy** - 1002123130
-
-## Cloud Hosting
-
-The Digital Thesis Repository is hosted on a cloud server, which can be accessed via the following URL:
-
-[Digital Thesis Repository](https://sxk7382.uta.cloud/)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Development](#development)
+  - [Frontend (Next.js)](#frontend-nextjs)
+  - [Backend (Express.js)](#backend-expressjs)
+  - [Chat Server (Socket.io)](#chat-server-socketio)
+- [Starting the Servers](#starting-the-servers)
+- [Database Setup](#database-setup)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
 To set up the project locally, follow these steps:
 
-Install dependencies:
+1. **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
 
-npm install
-Build the project:
+2. **Install dependencies**:
+    Run the following command to install the necessary dependencies:
+    ```bash
+    npm install
+    ```
 
-npm run build
-Deploy the project by zipping the build files and uploading them to your server.
+3. **Set up the database**:
+    - Ensure you have MySQL installed and running.
+    - Create a database named `wdm`.
+    - Import the SQL schema and data from `wdm.sql` into your MySQL database.
 
-Usage
-Once the project is hosted, you can access the repository through the provided cloud hosting URL. Users can browse, search, and download thesis as needed.
+## Usage
 
-Features
-Search functionality to find specific thesis.
-User-friendly interface for easy navigation.
-Secure access to academic research.
-Upload and manage thesis for faculty and students.
+Once the project is hosted, you can access the repository through the provided cloud hosting URL. Users can browse, search, and download theses as needed.
 
-Starting the development environment:
-npm run dev -
-to run the next js code
+## Features
 
-npm start -
-ti run the react js
+- **Search functionality**: Find specific theses with ease.
+- **User-friendly interface**: Navigate the platform easily.
+- **Secure access**: Access academic research securely.
+- **Thesis management**: Upload and manage theses for faculty and students.
 
-node chat.js -
-to start the socket.io and chat js server
+## Development
 
+### Starting the Development Environment
 
-Xampp - to start the phpMyAdmin
+#### Frontend (Next.js)
 
-Login credentials - shriisudhan@gmail.com, Password - 12345
+Start the frontend development server:
+```bash
+npm run dev
+```
+
+#### Backend (Express.js)
+
+Start the backend server:
+```bash
+npm run backend
+```
+
+#### Chat Server (Socket.io)
+
+Start the chat server:
+```bash
+npm run chat
+```
+
+## Starting the Servers
+
+1. **Frontend Development Server**: Runs the user interface.
+2. **Backend Server**: Manages the backend API and interactions.
+3. **Chat Server**: Powers real-time messaging and notifications.
+
+## Database Setup
+
+1. **Start MySQL Server**: 
+   - Use XAMPP or any other MySQL service to start the MySQL service.
+
+2. **Import Database Schema**:
+   - Open phpMyAdmin or any MySQL client.
+   - Create a new database named `wdm`.
+   - Import the `wdm.sql` file into the `wdm` database.
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
